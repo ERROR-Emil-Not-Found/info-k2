@@ -18,21 +18,18 @@ public class CaesarChiffre {
     /*
      * encrypts a given string by shifting each character by the `KEY` class attribute.
      * 
+     * works by first mapping the character to the range (0; 25) [`(c - 'A')`], then moving and applying modulo. Because of javas dumbest 
+     * modulo shit-design, negative modulo-values are possible, that's why there's 26 added in the statement to remeove that possibility.
+     * 
      * @param text the source text to be encrypted
      * @return encrypted text
     */
     public String encrypt(String text) {
         String encrypted = "";
         for(char c : text.toUpperCase().toCharArray()) {
-            char encryptedChar = (char) (
-                (((c - 'A') + KEY) % 26) % 26 + 'A'
+            encrypted += (char) (
+                (((c - 'A') + KEY + 26) % 26) % 26 + 'A'
             );
-
-            if (encryptedChar < 65) {
-                encryptedChar += 26;
-            }
-
-            encrypted += encryptedChar;
         }
 
         return encrypted;
@@ -48,15 +45,9 @@ public class CaesarChiffre {
     public String decrypt(String text) {
         String decrypted = "";
         for(char c : text.toUpperCase().toCharArray()) {
-            char decryptedChar = (char) (
-                (((c - 'A') - KEY) % 26) % 26 + 'A'
+            decrypted += (char) (
+                (((c - 'A') - KEY + 26) % 26) % 26 + 'A'
             );
-
-            if(decryptedChar < 65) {
-                decryptedChar += 26;
-            }
-
-            decrypted += decryptedChar;
         }
 
         return decrypted;
