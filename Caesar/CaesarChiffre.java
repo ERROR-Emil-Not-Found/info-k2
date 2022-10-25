@@ -19,7 +19,8 @@ public class CaesarChiffre {
      * encrypts a given string by shifting each character by the `KEY` class attribute.
      * 
      * works by first mapping the character to the range (0; 25) [`(c - 'A')`], then moving and applying modulo. Because of javas dumbest 
-     * modulo shit-design, negative modulo-values are possible, that's why there's 26 added in the statement to remeove that possibility.
+     * modulo shit-design, negative modulo-values are possible, that's why there's 26 added in the statement to remove that possibility.
+     * Afterwards, the new value is moved back to the original range by adding 'A'.
      * 
      * @param text the source text to be encrypted
      * @return encrypted text
